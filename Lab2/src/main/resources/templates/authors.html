@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Авторы</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <a th:href="@{/authors}">Авторы</a>
+    <a th:href="@{/books}">Книги</a>
+</nav>
+
+<h1>Авторы</h1>
+<a th:href="@{/authors/new}">Добавить автора</a>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Имя</th>
+        <th>Страна</th>
+        <th>Год рождения</th>
+        <th></th>
+    </tr>
+    <tr th:each="a : ${authors}">
+        <td th:text="${a.id}"></td>
+        <td th:text="${a.fullName}"></td>
+        <td th:text="${a.country}"></td>
+        <td th:text="${a.birthYear}"></td>
+        <td>
+            <a th:href="@{/authors/{id}/edit(id=${a.id})}">Изменить</a>
+            <form class="inline" method="post" th:action="@{/authors/{id}/delete(id=${a.id})}"
+                  onsubmit="return confirm('Удалить автора вместе с его книгами?')">
+                <button type="submit">Удалить</button>
+            </form>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
