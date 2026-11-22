@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Книга</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<nav>
+    <a th:href="@{/authors}">Авторы</a>
+    <a th:href="@{/books}">Книги</a>
+</nav>
+
+<h1 th:text="${book.id == null} ? 'Новая книга' : 'Редактирование книги'"></h1>
+
+<form method="post" th:action="@{/books/save}" th:object="${book}">
+    <input type="hidden" th:field="*{id}">
+    <div class="row">
+        <label for="title">Название</label>
+        <input th:field="*{title}" required maxlength="200">
+        <span class="error" th:errors="*{title}"></span>
+    </div>
+    <div class="row">
+        <label for="genre">Жанр</label>
+        <input th:field="*{genre}" maxlength="50">
+        <span class="error" th:errors="*{genre}"></span>
+    </div>
+    <div class="row">
+        <label for="publishYear">Год издания</label>
+        <input type="number" th:field="*{publishYear}">
+        <span class="error" th:errors="*{publishYear}"></span>
+    </div>
+    <div class="row">
+        <label for="pages">Страниц</label>
+        <input type="number" min="1" th:field="*{pages}">
+        <span class="error" th:errors="*{pages}"></span>
+    </div>
+    <div class="row">
+        <label for="authorId">Автор</label>
+        <select id="authorId" name="authorId" required>
+            <option th:each="a : ${authors}" th:value="${a.id}" th:text="${a.fullName}"
+                    th:selected="${book.author != null and book.author.id == a.id}"></option>
+        </select>
+    </div>
+    <button type="submit">Сохранить</button>
+    <a th:href="@{/books}">Отмена</a>
+</form>
+</body>
+</html>
