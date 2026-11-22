@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="https://jakarta.ee/xml/ns/jakartaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="https://jakarta.ee/xml/ns/jakartaee https://jakarta.ee/xml/ns/jakartaee/web-app_6_0.xsd"
+         version="6.0">
+
+    <display-name>Library</display-name>
+
+    <request-character-encoding>UTF-8</request-character-encoding>
+    <response-character-encoding>UTF-8</response-character-encoding>
+
+    <welcome-file-list>
+        <welcome-file>index.jsp</welcome-file>
+    </welcome-file-list>
+
+    <!-- настройки оповещений (используются MailNotifierBean) -->
+    <env-entry>
+        <description>Адреса получателей через запятую</description>
+        <env-entry-name>notify/recipients</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>admin@example.com</env-entry-value>
+    </env-entry>
+    <env-entry>
+        <description>Письмо отправляется, если имя автора или название книги содержит эту строку</description>
+        <env-entry-name>notify/keyword</env-entry-name>
+        <env-entry-type>java.lang.String</env-entry-type>
+        <env-entry-value>Толстой</env-entry-value>
+    </env-entry>
+</web-app>
